@@ -69,10 +69,10 @@ defmodule Contex.SVG do
     ]
   end
 
-  def line(points, smoothed, opts \\ []) do
+  def line(points, plot_style, opts \\ []) do
     attrs = opts_to_attrs(opts)
 
-    path = path(points, smoothed)
+    path = path(points, plot_style)
 
     [
       "<path d=\"",
