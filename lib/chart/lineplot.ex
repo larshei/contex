@@ -51,7 +51,7 @@ defmodule Contex.LinePlot do
     custom_y_formatter: nil,
     width: 100,
     height: 100,
-    smoothed: true,
+    plot_style: :smooth,
     stroke_width: "2",
     colour_palette: :default
   ]
@@ -106,7 +106,7 @@ defmodule Contex.LinePlot do
 
     - `:stroke_width` : 2 (default) - stroke width of the line
 
-    - `:smoothed` : true (default) or false - draw the lines smoothed
+    - `:plot_style` : :direct (default), :smooth or :step
 
   Note that the smoothing algorithm is a cardinal spline with tension = 0.3.
   You may get strange effects (e.g. loops / backtracks) in certain circumstances, e.g.
@@ -254,7 +254,7 @@ defmodule Contex.LinePlot do
          y_accessor,
          colour
        ) do
-    smooth = get_option(plot, :smoothed)
+    style = get_option(plot, :plot_style)
     stroke_width = get_option(plot, :stroke_width)
 
     options = [
@@ -282,7 +282,7 @@ defmodule Contex.LinePlot do
       |> Enum.chunk_by(fn {_x, y} -> is_nil(y) end)
       |> Enum.filter(fn [{_x, y} | _] -> not is_nil(y) end)
 
-    Enum.map(points_list, fn points -> line(points, smooth, options) end)
+    Enum.map(points_list, fn points -> line(points, style, options) end)
   end
 
   @doc false
