@@ -258,7 +258,14 @@ defmodule Contex.LinePlot do
     # keep backwards compatibility with old `:smoothed` option
     style = get_option(plot, :plot_style)
     smoothed = get_option(plot, :smoothed)
-    plot_style = if smoothed != nil, do: smoothed, else: style
+
+    plot_style =
+      case smoothed do
+        true -> :smooth
+        false -> :direct
+        _ -> style
+      end
+
     stroke_width = get_option(plot, :stroke_width)
 
     options = [
