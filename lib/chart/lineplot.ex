@@ -256,8 +256,8 @@ defmodule Contex.LinePlot do
          colour
        ) do
     # keep backwards compatibility with old `:smoothed` option
-    style = get_option(plot, :plot_style) |> IO.inspect(label: "style")
-    smoothed = get_option(plot, :smoothed) |> IO.inspect(label: "smoothed")
+    style = get_option(plot, :plot_style)
+    smoothed = get_option(plot, :smoothed)
     plot_style = if smoothed != nil, do: smoothed, else: style
     stroke_width = get_option(plot, :stroke_width)
 

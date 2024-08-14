@@ -86,8 +86,8 @@ defmodule Contex.SVG do
   defp path([], _), do: ""
 
   defp path(points, nil), do: path(points, :smooth)
-  defp path(points, true), do: path(points, IO.inspect(:smooth))
-  defp path(points, false), do: path(points, IO.inspect(:direct))
+  defp path(points, true), do: path(points, :smooth)
+  defp path(points, false), do: path(points, :direct)
 
   defp path(points, :direct) do
     Enum.reduce(points, :first, fn {x, y}, acc ->
@@ -98,7 +98,6 @@ defmodule Contex.SVG do
         _ -> [acc, [" L ", coord]]
       end
     end)
-    |> IO.inspect()
   end
 
   defp path(points, :step) do
@@ -116,7 +115,6 @@ defmodule Contex.SVG do
           acc ++ [" L ", ~s|#{new_x} #{previous_y}|, " L ", coord]
       end
     end)
-    |> IO.inspect()
   end
 
   defp path(points, :smooth) do
